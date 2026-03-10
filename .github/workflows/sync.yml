@@ -2,7 +2,7 @@ name: Sync Upstream
 
 on:
   schedule:
-    - cron: "0 7 * * *"   # 每天UTC 07:00 
+    - cron: "0 7 * * *"   # 每天 UTC 07:00
   workflow_dispatch:
 
 jobs:
@@ -10,13 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Sync upstream
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3
+        uses: repo-sync/github-sync@v2
         with:
-          upstream_sync_repo: SzeMeng76/LunaTV
-          upstream_sync_branch: main
-          target_sync_branch: main
-          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          source_repo: "https://github.com/SzeMeng76/LunaTV"
+          source_branch: "main"
+          destination_branch: "main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
